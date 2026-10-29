@@ -1,148 +1,80 @@
 <div align="center">
 
-# CRYPTONIX SYSTEMS
+# CRYPTONIX
 
-### Cybersecurity Research and Assessment
+### Cybersecurity Research, Security Testing & Engineering
 
-**Web Security Assessment: TryHackMe — Corridor**
-
-![Cybersecurity](assets/cybersecurity-banner.jpg)
-
-![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
-![Platform](https://img.shields.io/badge/Platform-TryHackMe-red)
-![Focus](https://img.shields.io/badge/Focus-Web%20Security-blue)
-
-**Prepared by:** Taslim Bano
-**Assessment Date:** 29 October 2026
+Building practical cybersecurity knowledge through hands-on assessments, systematic investigation, and the development of security-focused tools.
 
 </div>
 
 ---
 
-## 1. Project Overview
+## About Cryptonix
 
-This repository documents my investigation of the TryHackMe Corridor room, a web security challenge focused on predictable URL references and hash-based identifiers.
+Cryptonix is my evolving cybersecurity portfolio and engineering project. It brings together hands-on security assessments, technical investigations, and future projects focused on understanding vulnerabilities and building practical security solutions.
 
-I examined the application's HTML, extracted the available door references, and used Python and Linux command-line utilities to investigate how the hexadecimal URL values were generated.
+My goal is to progress beyond documenting lab exercises toward developing reproducible testing methods, useful tools, and well-documented security engineering projects.
 
-By calculating MD5 hashes of numeric strings and comparing them against the extracted references, I identified a predictable relationship between numeric inputs and door paths. I then investigated the endpoint associated with the numeric input `0`, retrieved the challenge flag, and verified successful room completion.
+## Projects
 
-The investigation gave me practical experience in endpoint analysis, hash investigation, browser developer tools, and evidence-based security reporting.
+### 1. TryHackMe — Corridor
 
-## 2. Assessment Details
+**Category:** Web Security Assessment
+**Focus:** HTML inspection, object reference analysis, MD5 hashing, HTTP requests, and resource discovery.
 
-| Attribute         | Details                                                |
-| ----------------- | ------------------------------------------------------ |
-| Organization      | Cryptonix Systems                                      |
-| Assessment        | TryHackMe — Corridor                                   |
-| Assessment Date   | 29 October 2026                                        |
-| Platform          | TryHackMe AttackBox                                    |
-| Tools             | Python 3, `hashlib`, `md5sum`, Firefox Developer Tools |
-| Primary Technique | Hash analysis and URL reference manipulation           |
-| Outcome           | Flag retrieved; room completion confirmed              |
+This assessment documents my investigation of the TryHackMe Corridor room. I examined the application's HTML, extracted door references from an image map, compared MD5 hashes, and investigated how the application handled different resource paths.
 
-## 3. Key Findings
+The assessment includes supporting screenshots, technical findings, and the final challenge completion evidence.
 
-### F-01 — Predictable Hash-Derived References
+* **[View the assessment README](cryptonix-corridor-assessment/README.md)**
+* **[Read the Markdown report](cryptonix-corridor-assessment/report/corridor-security-assessment.md)**
+* **[View the PDF report](cryptonix-corridor-assessment/report/corridor-security-assessment.pdf)**
+* **[Open the evidence folder](cryptonix-corridor-assessment/evidence/)**
 
-The extracted HTML contained 15 link references, including two external stylesheet URLs and 13 hash-like door references.
+**Challenge:** [TryHackMe — Corridor](https://tryhackme.com/room/corridor)
 
-My Python comparison showed that candidate indices 1–13 matched the extracted door-reference set, while index 14 did not.
+**Status:** Completed
 
-**Security relevance:** Predictable identifiers can make endpoint enumeration easier. Applications must not rely on identifier secrecy as a substitute for authorization.
+## Technical Interests
 
-[View hash extraction evidence](evidence/E03-extracted-door-hashes.png) · [View hash calculations](evidence/E04-md5-calculation-zero-and-one.png) · [View candidate comparison](evidence/E05-candidate-index-comparison.png)
+* Web application security
+* HTTP request and response analysis
+* Object reference manipulation
+* Hashing and resource discovery
+* Linux and Python scripting
+* Security testing automation
+* Vulnerability analysis and reproducible testing
 
-### F-02 — Challenge Flag Retrieval
+These are areas of interest and learning; they do not imply that every listed capability has been independently implemented in Cryptonix.
 
-I calculated the MD5 hash of the numeric string `0`:
-
-`cfcd208495d565ef66e7dff9f98764da`
-
-I requested the corresponding endpoint and retrieved the challenge flag.
-
-**Result:** The flag was accepted by TryHackMe, and the room reached 100% completion.
-
-![Challenge flag evidence](evidence/E07-flag-retrieval.png)
-
-![Room completion evidence](evidence/E12-room-completion-proof.png)
-
-### F-03 — HTTP and Browser Inspection
-
-I used Firefox Developer Tools to inspect HTTP responses and browser storage.
-
-The observations included an HTTP `200 OK` response for a tested door endpoint, an HTTP `404 Not Found` response for `favicon.ico`, and no data displayed in the selected Storage panel.
-
-These observations provide supporting context but do not independently establish a security vulnerability.
-
-## 4. Investigation Workflow
-
-The investigation followed these stages:
-
-1. Inspected the initial Corridor interface.
-2. Extracted URL references from the saved HTML.
-3. Calculated MD5 hashes for candidate numeric inputs.
-4. Compared the generated hashes against the extracted references.
-5. Investigated the endpoint associated with `0`.
-6. Retrieved the flag and verified room completion.
-7. Documented the findings and supporting evidence.
-
-## 5. Security Takeaway
-
-**A hash is not an authorization mechanism.**
-
-Hashing an identifier changes its representation but does not establish whether a user is permitted to access the corresponding resource.
-
-Applications should enforce server-side object-level authorization for every protected resource request, regardless of whether the identifier is numeric, hashed, or randomly generated.
-
-## 6. Full Assessment Report
-
-The complete technical report contains the assessment methodology, detailed findings, evidence register, security recommendations, limitations, and conclusion.
-
-**[Read the Full Corridor Security Assessment](report/corridor-security-assessment.md)**
-
-## 7. Repository Structure
+## Repository Structure
 
 ```text
-cryptonix-corridor-assessment/
+Cryptonix/
 ├── README.md
-├── assets/
-│   └── cybersecurity-banner.png
-├── report/
-│   └── corridor-security-assessment.md
-└── evidence/
-    ├── E01-initial-corridor-view.png
-    ├── E02-corridor-target-browser.png
-    ├── E03-extracted-door-hashes.png
-    ├── E04-md5-calculation-zero-and-one.png
-    ├── E05-candidate-index-comparison.png
-    ├── E06-hash-zero-endpoint.png
-    ├── E07-flag-retrieval.png
-    ├── E08-network-favicon-404.png
-    ├── E09-browser-storage-inspection.png
-    ├── E10-network-door-request-details.png
-    ├── E11-network-door-request-summary.png
-    └── E12-room-completion-proof.png
+├── cryptonix-corridor-assessment/
+   ├── README.md
+   ├── assets/
+   ├── evidence/
+   └── report/
 ```
 
-## 8. Scope and Limitations
+The repository will evolve as additional assessments, tools, and engineering projects are developed.
 
-This repository documents the completed TryHackMe Corridor challenge. The findings are limited to the observed application behavior and the evidence collected during the assessment.
+## Future Direction
 
-The broader major project includes additional exploitation phases involving web application exploitation, shell execution, Metasploit, and Linux privilege escalation. Those phases are not demonstrated in this assessment and are not claimed as completed.
+My long-term goal is to develop Cryptonix into a more substantial cybersecurity engineering project by progressing from individual assessments toward original tools, repeatable testing workflows, documented design decisions, and measurable results.
 
-## 9. References
+Future work will be added as it is implemented and validated.
 
-* [TryHackMe](https://tryhackme.com/)
-* [Python `hashlib` Documentation](https://docs.python.org/3/library/hashlib.html)
-* [OWASP IDOR Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet.html)
+## Author
+
+**Taslim Bano**
+
+* [GitHub Profile](https://github.com/Taslimrocks)
+* [TryHackMe Profile](https://tryhackme.com/p/taslimbano324)
 
 ---
 
-<div align="center">
-
-**CRYPTONIX SYSTEMS**
-
-*Evidence-driven security research and practical cybersecurity learning.*
-
-</div>
+*Cryptonix is an ongoing learning and engineering project. Assessment activities are performed in authorized lab environments.*
